@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 import android.widget.*
+import java.lang.Exception
 import java.math.RoundingMode
 
 
@@ -22,25 +23,46 @@ class MainActivity : AppCompatActivity() {
         val grandTotal: TextView = findViewById(R.id.grandTotal)
 
 
-
         button.setOnClickListener {
             billLabel.text = billAmount.text.toString()
             grandTotal.text = billAmount.text.toString()
 
-            var radioCheckedId = tipPercent.checkedRadioButtonId  //retrieves the Id number (see RadioButton xml)
-            var checkedIdString = resources.getResourceEntryName(radioCheckedId) //converts Id number to string Id name
-            var billAmountDouble:Double = billAmount.text.toString().toDouble()
+            val radioCheckedId = tipPercent.checkedRadioButtonId  //retrieves the Id number (see RadioButton xml)
+
+            val billAmountDouble:Double = billAmount.text.toString().toDouble()
             var tip: Double = 0.00
+            val rb = findViewById<RadioButton>(tipPercent.checkedRadioButtonId)
 
-            if (checkedIdString == "tip10") tip = 0.10 //todo: Format decimal to two places
-            if (checkedIdString == "tip15") tip = 0.15
-            if (checkedIdString == "tip18") tip = 0.18
-            if (checkedIdString == "tip20") tip = 0.20
+            if(rb == null) {
+                Toast.makeText(this, "Please choose a percentage.", Toast.LENGTH_LONG).show()
+            }
+            else {
+                val checkedIdString = resources.getResourceEntryName(radioCheckedId) //converts Id number to string Id name
 
-            tipLabel.text = (tip.toBigDecimal() * billAmountDouble.toBigDecimal()).setScale(2, RoundingMode.HALF_EVEN).toString()
-            grandTotal.text = (tipLabel.text.toString().toBigDecimal() + billAmountDouble.toBigDecimal()).setScale(2, RoundingMode.HALF_EVEN).toString()
+                if (checkedIdString == "tip10") tip = 0.10
+                if (checkedIdString == "tip15") tip = 0.15
+                if (checkedIdString == "tip18") tip = 0.18
+                if (checkedIdString == "tip20") tip = 0.20
+
+                tipLabel.text = (tip.toBigDecimal() * billAmountDouble.toBigDecimal()).setScale(
+                    2,
+                    RoundingMode.HALF_EVEN
+                ).toString()
+                grandTotal.text = (tipLabel.text.toString()
+                    .toBigDecimal() + billAmountDouble.toBigDecimal()).setScale(
+                    2,
+                    RoundingMode.HALF_EVEN
+                ).toString()
+            }
+
+
+
+
 
         } //end OnClick
+
     } //end onCreate
 
-}
+
+
+} //end of Activity

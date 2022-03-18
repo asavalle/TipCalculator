@@ -3,4 +3,6 @@
     <string name="input_top">Total Bill</string>
     <string name="bottom_label">Grand Total</string>
     <string name="bill"></string>
+    <string name="billLabel">Bill</string>
+    <string name="tipLabel">Tip</string>
 </resources>
