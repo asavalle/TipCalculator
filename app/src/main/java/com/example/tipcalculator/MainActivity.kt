@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 import android.widget.*
+import java.math.RoundingMode
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,22 +19,26 @@ class MainActivity : AppCompatActivity() {
         val tipLabel: TextView = findViewById(R.id.tipLabel)
         val billLabel: TextView = findViewById(R.id.billLabel)
         val tipPercent: RadioGroup = findViewById(R.id.radioGroup)
+        val grandTotal: TextView = findViewById(R.id.grandTotal)
 
-        //TODO Broken: Was working, now doesn't set billLabel to entered number
+
+
         button.setOnClickListener {
             billLabel.text = billAmount.text.toString()
-            //TODO Implement try, catch or other error capture. When radial button is not selected.
+            grandTotal.text = billAmount.text.toString()
 
-                    val radioCheckedId = tipPercent.checkedRadioButtonId
-                    val checkedIdString = resources.getResourceEntryName(radioCheckedId)
+            var radioCheckedId = tipPercent.checkedRadioButtonId  //retrieves the Id number (see RadioButton xml)
+            var checkedIdString = resources.getResourceEntryName(radioCheckedId) //converts Id number to string Id name
+            var billAmountDouble:Double = billAmount.text.toString().toDouble()
+            var tip: Double = 0.00
 
-            val billAmountDouble = billAmount.text.toString().toDouble()
+            if (checkedIdString == "tip10") tip = 0.10 //todo: Format decimal to two places
+            if (checkedIdString == "tip15") tip = 0.15
+            if (checkedIdString == "tip18") tip = 0.18
+            if (checkedIdString == "tip20") tip = 0.20
 
-            if (checkedIdString == "tip10") {
-                val tip: Double = billAmountDouble * .10
-                tipLabel.text = tip.toString()
-            } //todo: Format decimal to two places
-
+            tipLabel.text = (tip.toBigDecimal() * billAmountDouble.toBigDecimal()).setScale(2, RoundingMode.HALF_EVEN).toString()
+            grandTotal.text = (tipLabel.text.toString().toBigDecimal() + billAmountDouble.toBigDecimal()).setScale(2, RoundingMode.HALF_EVEN).toString()
 
         } //end OnClick
     } //end onCreate

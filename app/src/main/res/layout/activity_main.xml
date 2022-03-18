@@ -22,13 +22,18 @@
         android:id="@+id/billAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         android:autoText="false"
         android:ems="10"
         android:hint="Enter Bill (ex. 21.95)"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/calcBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -37,14 +42,14 @@
         android:id="@+id/grandTotalLabel"
         android:layout_width="153dp"
         android:layout_height="27dp"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="20dp"
         android:text="@string/bottom_label"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView5"
+        app:layout_constraintBottom_toTopOf="@+id/grandTotal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tipLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <TextView
         android:id="@+id/billLabel"
@@ -67,21 +72,19 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:contentDescription="TipAmount"
-        android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/billLabel" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/grandTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="10dp"
-        android:text="TextView"
         android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tipLabel" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grandTotalLabel" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -92,65 +95,64 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6">
+        app:layout_constraintTop_toBottomOf="@+id/choosePercentLabel">
 
         <RadioButton
             android:id="@+id/tip10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5sp"
             android:text="10%"
             android:textSize="20sp"
-            android:padding="5sp"
             app:buttonTint="#000000" />
 
         <RadioButton
             android:id="@+id/tip15"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5sp"
             android:text="15%"
             android:textSize="20sp"
-            android:padding="5sp"
             app:buttonTint="#000000" />
 
         <RadioButton
             android:id="@+id/tip18"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5sp"
             android:text="18%"
             android:textSize="20sp"
-            android:padding="5sp"
             app:buttonTint="#000000" />
 
         <RadioButton
             android:id="@+id/tip20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5sp"
             android:text="20%"
             android:textSize="20sp"
-            android:padding="5sp"
             app:buttonTint="#000000" />
     </RadioGroup>
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/choosePercentLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         android:text="Choose Tip Percentage:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/billAmount" />
+        app:layout_constraintTop_toBottomOf="@+id/calcBtn" />
 
     <Button
         android:id="@+id/calcBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
         android:text="Calculate"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/billAmount"
+        app:layout_constraintBottom_toTopOf="@+id/choosePercentLabel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/billAmount" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
